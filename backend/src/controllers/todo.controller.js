@@ -1,9 +1,6 @@
 const TodoStore = require("../data/todos");
 
-/**
- * GET /api/todos
- * Returns all todos.
- */
+/* GET /api/todos */
 const getAllTodos = (req, res) => {
   try {
     const todos = TodoStore.getAll();
@@ -16,10 +13,7 @@ const getAllTodos = (req, res) => {
   }
 };
 
-/**
- * GET /api/todos/:id
- * Returns a single todo by ID.
- */
+/* GET /api/todos/:id */
 const getTodoById = (req, res) => {
   try {
     const id = parseInt(req.params.id, 10);
@@ -39,11 +33,7 @@ const getTodoById = (req, res) => {
   }
 };
 
-/**
- * POST /api/todos
- * Creates a new todo.
- * Body: { title: string }
- */
+/* POST /api/todos */
 const createTodo = (req, res) => {
   try {
     const { title } = req.body;
@@ -67,11 +57,7 @@ const createTodo = (req, res) => {
   }
 };
 
-/**
- * PUT /api/todos/:id
- * Updates an existing todo.
- * Body: { title?: string, completed?: boolean }
- */
+/* PUT /api/todos/:id */
 const updateTodo = (req, res) => {
   try {
     const id = parseInt(req.params.id, 10);
@@ -82,14 +68,12 @@ const updateTodo = (req, res) => {
 
     const { title, completed } = req.body;
 
-    // Validate title if provided
     if (title !== undefined) {
       if (typeof title !== "string" || title.trim() === "") {
         return res.status(400).json({ success: false, message: "Title cannot be empty" });
       }
     }
 
-    // Validate completed if provided
     if (completed !== undefined && typeof completed !== "boolean") {
       return res.status(400).json({ success: false, message: "Completed must be a boolean" });
     }
@@ -109,10 +93,7 @@ const updateTodo = (req, res) => {
   }
 };
 
-/**
- * DELETE /api/todos/:id
- * Deletes a todo by ID.
- */
+/* DELETE /api/todos/:id */
 const deleteTodo = (req, res) => {
   try {
     const id = parseInt(req.params.id, 10);

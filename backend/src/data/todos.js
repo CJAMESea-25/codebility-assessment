@@ -1,29 +1,15 @@
-/**
- * In-memory data store for todos.
- * Acts as the single source of truth for all CRUD operations.
- */
+// In-memory data store for todos; acts as the single source of truth for all CRUD operations.
 
 let todos = [];
 let nextId = 1;
 
-/**
- * Returns the current list of todos.
- * @returns {Array} todos
- */
+// Returns the current list of todos.
 const getAll = () => todos;
 
-/**
- * Finds a todo by its ID.
- * @param {number} id
- * @returns {Object|undefined}
- */
+// Finds a todo by its ID.
 const findById = (id) => todos.find((todo) => todo.id === id);
 
-/**
- * Creates and stores a new todo.
- * @param {string} title
- * @returns {Object} created todo
- */
+// Creates and stores a new todo with auto-incremented ID.
 const create = (title) => {
   const newTodo = {
     id: nextId++,
@@ -35,12 +21,7 @@ const create = (title) => {
   return newTodo;
 };
 
-/**
- * Updates an existing todo by ID.
- * @param {number} id
- * @param {Object} fields - { title?, completed? }
- * @returns {Object|null} updated todo or null if not found
- */
+// Updates an existing todo by ID; returns updated todo or null if not found.
 const update = (id, fields) => {
   const todo = findById(id);
   if (!todo) return null;
@@ -51,11 +32,7 @@ const update = (id, fields) => {
   return todo;
 };
 
-/**
- * Removes a todo by ID.
- * @param {number} id
- * @returns {boolean} true if deleted, false if not found
- */
+// Removes a todo by ID; returns true if deleted, false if not found.
 const remove = (id) => {
   const index = todos.findIndex((todo) => todo.id === id);
   if (index === -1) return false;
